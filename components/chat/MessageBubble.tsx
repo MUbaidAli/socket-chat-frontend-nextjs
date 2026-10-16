@@ -7,6 +7,10 @@ interface MessageBubbleProps {
 }
 
 export default function MessageBubble({ message, isOwn }: MessageBubbleProps) {
+  
+  console.log(message, "messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+    console.log(isOwn, "isOwnwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww")
+  
   return (
     <div className={`flex ${isOwn ? "justify-end" : "justify-start"}`}>
       <div
@@ -16,7 +20,7 @@ export default function MessageBubble({ message, isOwn }: MessageBubbleProps) {
             : "rounded-bl-md border border-slate-200 bg-white text-slate-900"
         }`}
       >
-        <p className="whitespace-pre-wrap break-words text-[15px] leading-relaxed">{message.text}</p>
+        <p className="whitespace-pre-wrap break-words text-[15px] leading-relaxed">{message.message}</p>
         <div className={`mt-1 flex items-center justify-end gap-1 text-[11px] ${isOwn ? "text-teal-100" : "text-slate-500"}`}>
           <span>{message.sentAt}</span>
           {isOwn &&

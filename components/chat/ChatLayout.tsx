@@ -18,6 +18,9 @@ export default function ChatLayout({ user }) {
   const [mobileChatOpen, setMobileChatOpen] = useState(false);
   const socket = useSocket();
 
+
+
+  console.log(socket, "socketttttttttttttttttttttttttttttt");
   // 1. Fetch Users List
   useEffect(() => {
     async function getUsers() {
@@ -47,8 +50,8 @@ export default function ChatLayout({ user }) {
     async function getChat() {
       try {
         const response = await axios.get(`/chat/${user._id}/${active._id}`);
-        console.log("Chat history fetched:", response.data);
-        
+        console.log("Chat history fetched:", response.data.data);
+        setMessages(response.data.data); // Assuming response.data.data is structured correctly for your state
         // Suggestion: update your local message history state state here
         // setMessages(prev => ({ ...prev, [active._id]: response.data.data }));
       } catch (error) {
@@ -58,6 +61,27 @@ export default function ChatLayout({ user }) {
 
     getChat();
   }, [active, user?._id]);
+
+
+
+useEffect(()=>{
+  if(!socket) return;
+  function handleIncomingMessage(message){
+
+    console.log(message, "incoming messageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+
+    setMessages(prev => ([...prev  , message]))
+
+    }
+
+    socket.on("private-message", handleIncomingMessage)
+
+    return () =>{
+      socket.off("private-message", handleIncomingMessage)  
+    }
+
+},[socket,user?._id])
+
 
   function handleSelect(id: string) {
     setActiveId(id);
@@ -102,7 +126,7 @@ export default function ChatLayout({ user }) {
           <>
             <ChatHeader user={active} onBack={() => setMobileChatOpen(false)} />
             {/* ID Key Fix: Changed active.id to active._id to align with Mongo keys */}
-            <MessageList messages={messages[active._id] ?? []} currentUserId={user?._id} />
+            <MessageList messages={messages ?? []} currentUserId={user?._id} />
             <MessageInput onSend={handleSend} />
           </>
         ) : (

@@ -30,8 +30,9 @@ export default function MessageList({ messages, currentUserId }: MessageListProp
         <span className="rounded-full bg-slate-200 px-3 py-1 text-xs font-medium text-slate-600">Today</span>
       </div>
 
-      {messages.map((m) => (
-        <MessageBubble key={m.id} message={m} isOwn={m.senderId === currentUserId} />
+      {messages.length > 0 &&messages.map((m) => (
+        console.log(m, "messagesssssssssssssssssssssssssssssss"),
+        <MessageBubble key={m._id} message={m} isOwn={m.sender._id === currentUserId} />
       ))}
       <div ref={endRef} />
     </div>
