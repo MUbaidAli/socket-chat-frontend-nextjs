@@ -23,12 +23,15 @@ export default function ChatSidebar({ currentUser, conversations, activeId, onSe
 
 
 
+  console.log(currentUser, "currentUserrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+
+
 
   return (
     <div className="flex h-full flex-col bg-white">
       {/* Current user */}
       <div className="flex items-center gap-3 border-b border-slate-200 px-4 py-4">
-        <Avatar name={currentUser?.username  } status={currentUser.status} />
+        <Avatar name={currentUser?.username  } status={currentUser.isOnline} />
         <div className="min-w-0 flex-1">
           <p className="truncate font-semibold text-slate-900">{currentUser.username}</p>
           <p className="truncate text-sm text-slate-500">{currentUser.email}</p>

@@ -21,7 +21,7 @@ export default function ConversationItem({ conversation, active, onClick }: Conv
         active ? "bg-teal-50" : "hover:bg-slate-100"
       }`}
     >
-      <Avatar name={username}  />
+      <Avatar name={username}  status={conversation.isOnline}/>
 
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-2">

@@ -1,4 +1,4 @@
-export type UserStatus = "online" | "away" | "offline";
+export type UserStatus = boolean;
 
 export interface User {
   id: string;

@@ -41,6 +41,10 @@ export default function Avatar({ name, size = "md", status }: AvatarProps) {
     .join("")
     .toUpperCase();
 
+
+
+
+    console.log(status, "statussssssssssssssssssssssssssssssssssssss")
   return (
     <div className="relative shrink-0">
       <div
@@ -51,8 +55,8 @@ export default function Avatar({ name, size = "md", status }: AvatarProps) {
       </div>
       {status && (
         <span
-          className={`absolute bottom-0 right-0 h-3 w-3 rounded-full ring-2 ring-white ${STATUS_COLORS[status]}`}
-          title={status}
+          className={`absolute bottom-0 right-0 h-3 w-3 rounded-full ring-2 ring-white ${STATUS_COLORS[status ? "online" : "offline"]}`}
+          title={status ? "Online" : "Offline"}
         />
       )}
     </div>

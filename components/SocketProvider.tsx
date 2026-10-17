@@ -11,7 +11,7 @@ export const useSocket = () => useContext(SocketContext)
 
 export default function SocketProvider({children, currentUserId} :{children:React.ReactNode}) {
     const [socket,setSocket] = useState(undefined)
-
+    // const [isOnline ,setIsOnline] =  useState(false); 
     useEffect(()=>{
             if(!currentUserId) return;
 
@@ -22,6 +22,7 @@ export default function SocketProvider({children, currentUserId} :{children:Reac
             socketInstance.on("connect" , (socket)=>{
                         // console.log(socket.id)
                         socketInstance.emit("login" , currentUserId)
+                        // setIsOnline(true)
 
             })
 
